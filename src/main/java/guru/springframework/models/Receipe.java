@@ -28,6 +28,12 @@ public class Receipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receipe")
     private Set<Ingredient> ingredients;
 
+    @ManyToMany
+    @JoinTable(name = "receipe_category",
+        joinColumns = @JoinColumn(name = "receipe_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
     public Long getId() {
         return id;
     }
@@ -122,5 +128,13 @@ public class Receipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
